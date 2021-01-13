@@ -2,20 +2,6 @@
 
 var ul = document.querySelector("#list");
 var storedTodos = [];
-//  = [
-//   {
-//     todo: "sample todo1",
-//     isChecked: { value: true, id: 1610454149410 },
-//   },
-//   {
-//     todo: "sample todo2",
-//     isChecked: { value: false, id: 1610454149411 },
-//   },
-//   {
-//     todo: "sample todo4",
-//     isChecked: { value: false, id: 1610454149412 },
-//   },
-// ];
 
 const setTodos = (ele) => {
   if (ele.length !== 0) localStorage.setItem("stored", JSON.stringify(ele));
@@ -76,22 +62,6 @@ const onCheck = (value) => {
   setTodos(storedTodos);
 };
 
-var removeBtn = document.querySelector("#remove");
-removeBtn.addEventListener("click", () => {
-  storedTodos = storedTodos.filter((ele) => ele.isChecked.value === false);
-
-  setTodos(storedTodos);
-
-  let li = ul.children;
-  for (var i = 0; i < li.length; i++) {
-    if (li[i].children[0].checked) {
-      ul.removeChild(li[i]);
-      i--;
-    }
-  }
-  document.querySelector("#all").innerText = "Check All";
-});
-
 var addBtn = document.querySelector("#add");
 addBtn.addEventListener("click", () => {
   let newTodoValue = document.querySelector("#input").value;
@@ -127,8 +97,24 @@ addBtn.addEventListener("click", () => {
     setTodos(storedTodos);
 
     addListItem(newTodo);
-    // document.querySelector("#input").value = "";
+    document.querySelector("#input").value = "";
   }
+});
+
+var removeBtn = document.querySelector("#remove");
+removeBtn.addEventListener("click", () => {
+  storedTodos = storedTodos.filter((ele) => ele.isChecked.value === false);
+
+  setTodos(storedTodos);
+
+  let li = ul.children;
+  for (var i = 0; i < li.length; i++) {
+    if (li[i].children[0].checked) {
+      ul.removeChild(li[i]);
+      i--;
+    }
+  }
+  document.querySelector("#all").innerText = "Check All";
 });
 
 //check/uncheck all button
